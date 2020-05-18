@@ -1,8 +1,8 @@
-import React, {cloneElement} from 'react';
-import {isArray, isFunction} from '../___utils/isType';
+import React, { cloneElement } from 'react';
+import { isArray, isFunction } from '../___utils/isType';
 import DefaultBlank from './DefaultBlank';
 
-export type renderFunc = (item: any, key: number | string) => JSX.Element | null;
+export type renderFunc = (item: any, key: number) => JSX.Element | null;
 
 export const renderBlank = (renderWhenEmpty: null | (() => JSX.Element) = null): JSX.Element => (
     renderWhenEmpty && isFunction(renderWhenEmpty) ? renderWhenEmpty() : DefaultBlank()
@@ -17,20 +17,20 @@ export const handleRenderGroupSeparator = (CustomSeparator: any) => (sep: any, i
             const Sep = CustomSeparator(group, idx, groupLabel);
             return (
                 <div key={separatorKey} className={cls}>
-                    <Sep.type {...Sep.props}/>
+                    <Sep.type {...Sep.props} />
                 </div>
             );
         }
 
         return (
             <div key={separatorKey} className={cls}>
-                {cloneElement(CustomSeparator, {groupLabel, group})}
+                {cloneElement(CustomSeparator, { groupLabel, group })}
             </div>
         );
     }
 
     return (
-        <hr key={separatorKey} className={cls}/>
+        <hr key={separatorKey} className={cls} />
     );
 };
 
@@ -53,7 +53,7 @@ export const handleRenderItem = (
     }
 
     const comp = renderItem as JSX.Element;
-    return (<comp.type {...comp.props} key={key} item={item}/>);
+    return (<comp.type {...comp.props} key={key} item={item} />);
 };
 
 export const btnPosition = (scrollContainer: HTMLElement, btn: HTMLElement) => {
